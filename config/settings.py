@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path, os
 from dotenv import load_dotenv
+import sys
 
 load_dotenv()
 
@@ -31,6 +32,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Configure the apps project root
+
+PROJECT_ROOT = os.path.dirname(__file__)
+
+sys.path.insert(0,os.path.join(PROJECT_ROOT, '../apps'))
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'lista_tarefas',
 ]
 
 MIDDLEWARE = [
