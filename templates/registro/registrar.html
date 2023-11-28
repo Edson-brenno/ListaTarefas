@@ -33,6 +33,18 @@
                 <!--Fim Cabeçalho card-->
 
                 <div class="card-body">
+                        
+                    <!--Verifica se tem mensagem de error-->
+                    {%if mensagem != None %}
+
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{mensagem}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                       
+                    {% endif %}
+
+                    
                     
                     <!--Fom-->
                     <form method="post" name="registro">
@@ -40,14 +52,14 @@
 
                         <!--Usuario-->
                         <div class="form-floating mb-3" >
-                            <input name="username" type="text" class="form-control" id="floatingInput" placeholder="ex:usuario" onblur="verificar_usuario()" oninput="verificar_usuario()">
+                            <input name="username" type="text" class="form-control" id="floatingInput" placeholder="ex:usuario" onblur="verificar_usuario()" oninput="verificar_usuario()" required>
                             <label for="floatingInput">Usuario</label>
                           </div>
                           <div class="alert alert-danger esconder" id="usernamenulo" role="alert"></div>
                         
                         <!--Senha-->
                         <div class="form-floating">
-                        <input name="senha" type="password" class="form-control" id="floatingPassword" placeholder="senha" onblur="verificar_senha()" oninput="verificar_senha()">
+                        <input name="senha" type="password" class="form-control" id="floatingPassword" placeholder="senha" onblur="verificar_senha()" oninput="verificar_senha()" required>
                         <label for="floatingPassword">Senha</label>
                         </div>
     
