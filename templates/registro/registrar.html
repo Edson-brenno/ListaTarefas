@@ -1,0 +1,146 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar</title>
+    
+    <!--Css Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!--Css-->
+    <link href="{% static 'css/registrar.css'%}" rel="stylesheet">
+</head>
+
+<body>
+    
+    <main>
+        <article id='registro_main'>
+
+            <div class="card text-center">
+
+                <!--Cabeçalho card-->
+                <div class="card-header">
+                  Registrar Usuário
+                </div>
+                <!--Fim Cabeçalho card-->
+
+                <div class="card-body">
+                    
+                    <!--Fom-->
+                    <form method="post" name="registro">
+                        {% csrf_token %}
+
+                        <!--Usuario-->
+                        <div class="form-floating mb-3" >
+                            <input name="username" type="text" class="form-control" id="floatingInput" placeholder="ex:usuario" onblur="verificar_usuario()" oninput="verificar_usuario()">
+                            <label for="floatingInput">Usuario</label>
+                          </div>
+                          <div class="alert alert-danger esconder" id="usernamenulo" role="alert"></div>
+                        
+                        <!--Senha-->
+                        <div class="form-floating">
+                        <input name="senha" type="password" class="form-control" id="floatingPassword" placeholder="senha" onblur="verificar_senha()" oninput="verificar_senha()">
+                        <label for="floatingPassword">Senha</label>
+                        </div>
+    
+                        <div class="alert alert-danger esconder" id="senhaalerta" role="alert"></div>
+
+                        <button type="submit" class="btn btn-primary mt-3">Criar</button>
+
+                    </form>
+
+                </div>
+
+                
+                  
+              </div>
+        </article>
+    </main>
+    
+
+    <footer>
+
+        <!--Js bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+        <!--js-->
+        <script>
+
+            //Função a ser utilizada para validacao do usuario
+            function verificar_usuario(){
+                
+                elemento = document.getElementById("floatingInput")
+
+                aviso = document.getElementById('usernamenulo')
+                
+                if(elemento.value === ''){
+                
+                    elemento.classList.add('is-invalid')
+
+                    aviso.textContent = 'O usuário não pode ser nulo'
+
+                    aviso.classList.remove('esconder')
+                }
+                else if (elemento.value.length < 3){
+
+                    elemento.classList.add('is-invalid')
+                    
+                    aviso.textContent = 'O usuário tem que ter no minimo 3 caracteres'
+
+                    aviso.classList.remove('esconder')
+                }
+                else{
+                    elemento.classList.remove('is-invalid')
+
+                    elemento.classList.add('is-valid')
+
+                    aviso.classList.add('esconder')
+                }
+            }
+
+            //Função a ser utilizada para validacao do senha
+            function verificar_senha(){
+                
+                elemento = document.getElementById("floatingPassword")
+
+                aviso = document.getElementById('senhaalerta')
+                
+                if(elemento.value === ''){
+                
+                    elemento.classList.add('is-invalid')
+
+                    aviso.textContent = 'A senha não pode ser nula'
+
+                    aviso.classList.remove('esconder')
+                }
+                else if (elemento.value.length < 6){
+
+                    elemento.classList.add('is-invalid')
+                    
+                    aviso.textContent = 'O usuário tem que ter no minimo 6 caracteres'
+
+                    aviso.classList.remove('esconder')
+                }
+                else{
+                    elemento.classList.remove('is-invalid')
+
+                    elemento.classList.add('is-valid')
+
+                    aviso.classList.add('esconder')
+                }
+            }
+
+
+        </script>
+    </footer>
+</body>
+
+</html>
