@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'index',
     'registrar_usuario',
+    'login',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
