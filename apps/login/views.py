@@ -7,10 +7,10 @@ def login(request):
 
     mensagem = ""
 
+    usuario_form = request.POST.get('usuario','') 
+    senha_form = request.POST.get('senha','')
+    
     if request.method == 'POST':
-
-        usuario_form = request.POST.get('usuario','') 
-        senha_form = request.POST.get('senha','')
         
         # Verifica a autenticidade do usuário
         usuario = authenticate(request, username=usuario_form, password=senha_form)
@@ -20,11 +20,17 @@ def login(request):
             auth_login(request, usuario)
 
             return redirect('/index/')
-        else:
+
+        print(usuario_form)
+        if usuario is None:
+
             mensagem = ("usuario ou senha inválidos")
+
+            return render(request, 'login/login.html', context={'mensagem': mensagem,'usuario':usuario_form,'senha2':senha_form})
+        
     
     
-    return render(request, 'login/login.html', context={'mensagem':mensagem})
+    return render(request, 'login/login.html', context={'mensagem':mensagem,'usuario':usuario_form,'senha2':senha_form})
    
 
 def logout(request):

@@ -28,4 +28,4 @@ def registro_usuario(request):
     
     else:
         
-        return render(request,'registro/registrar.html', context={"mensagem":'O Usuario e senha não podem ser nulo'})
+        return render(request,'registro/registrar.html', context={"mensagem":''})

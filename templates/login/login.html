@@ -18,6 +18,7 @@
     <main>
 
       <section class="vh-100 gradient-custom">
+        
 
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -26,7 +27,15 @@
                 <div class="card-body p-5 text-center">
       
                   <div class="mb-md-4 mt-md-3 pb-5">
-      
+                    <!--Verifica se tem mensagem de error-->
+                    {%if mensagem != '' %}
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{mensagem}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  
+                    {% endif %}
                     <h2 class="fw-bold mb-2 text-white text-uppercase">Login</h2>
                     <p class="text-white-50 mb-4">Por favor, digite o usuario e senha!</p>
                     
@@ -34,12 +43,12 @@
                       
                       {% csrf_token %}
                       <div class="form-floating mb-3">
-                        <input name="usuario" type="text" class="form-control" id="floatingInput" placeholder="usuario1" required>
+                        <input name="usuario" type="text" class="form-control" id="floatingInput" placeholder="usuario1" value="{{usuario}}" required>
                         <label for="floatingInput">Usuário</label>
                       </div>
                       
                       <div class="form-floating">
-                        <input name="senha" type="password" class="form-control" id="floatingPassword" placeholder="Senha" required>
+                        <input name="senha" type="password" class="form-control" id="floatingPassword" placeholder="Senha" values="{{senha2}}" required>
                         <label for="floatingPassword">Senha</label>
                       </div>
         
