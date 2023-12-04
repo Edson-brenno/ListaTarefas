@@ -55,14 +55,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Navbar brand -->
                 <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                <img
-                    src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                    height="15"
-                    alt="MDB Logo"
-                    loading="lazy"
-                />
-
-                <small>Lista Tarefas</small>
+                
+                <i class="fa fa-check bg-primary text-white rounded p-2"></i>
+                <small> Lista Tarefas</small>
                 </a>
                 
             </div>
@@ -93,11 +88,9 @@
                     class="dropdown-menu dropdown-menu-end"
                     aria-labelledby="navbarDropdownMenuAvatar"
                 >
+
                     <li>
-                    <a class="dropdown-item" href="#">My profile</a>
-                    </li>
-                    <li>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </li>
                 </ul>
                 </div>
