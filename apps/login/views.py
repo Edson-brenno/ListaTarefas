@@ -4,4 +4,4 @@ from django.shortcuts import render, HttpResponse
 
 def login(request):
     
-    return HttpResponse("<h1>login</h1>")
+    return render(request, 'login/login.html', context={})
