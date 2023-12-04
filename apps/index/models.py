@@ -11,8 +11,14 @@ class TbTarefasFat(models.Model):
     data_criacao = models.DateField(auto_now_add=True, blank=False, null=False)
     foi_finalizada = models.BooleanField(default=False)
     foi_arquivada = models.BooleanField(default=False)
-    id_usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
 
+    # Adiciona uma tarefa no models
+    @classmethod
+    def adicionar_tarefa(cls, titulo, data, usuario):
+        
+        nova_tarefa = cls(titulo= titulo, data_atividade = data, usuario = usuario)
+        nova_tarefa.save()
     class Meta:
         
         ordering = ['id']
