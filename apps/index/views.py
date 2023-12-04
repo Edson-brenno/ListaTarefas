@@ -14,5 +14,4 @@ def index(request):
 
         TbTarefasFat.adicionar_tarefa(titulo_tarefa, dt_tarefa, request.user)
 
-
-    return render(request, 'to_do/to_do.html', context={'usuario':request.user.username})
+    return render(request, 'to_do/to_do.html', context={'usuario':request.user.username, 'tarefas':TbTarefasFat.obter_tarefas_ativas(request.user)})

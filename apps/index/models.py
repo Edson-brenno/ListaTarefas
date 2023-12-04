@@ -16,9 +16,16 @@ class TbTarefasFat(models.Model):
     # Adiciona uma tarefa no models
     @classmethod
     def adicionar_tarefa(cls, titulo, data, usuario):
-        
+
         nova_tarefa = cls(titulo= titulo, data_atividade = data, usuario = usuario)
         nova_tarefa.save()
+    
+    # Obter atividades ativas
+    @classmethod
+    def obter_tarefas_ativas(cls,usuario):
+        print("eadassda")
+        return cls.objects.filter(usuario=usuario, foi_finalizada=False).values('id','titulo','data_atividade','data_criacao',
+                                                                                'foi_finalizada')
     class Meta:
         
         ordering = ['id']
