@@ -159,9 +159,9 @@
                                 <tr>
                                     <td>
                                         {% if tarefa.foi_finalizada == True %}
-                                            <input class="form-check-input" type="checkbox" value="{{tarefa.id}}" id="flexCheckDefault" checked/>
+                                            <input class="form-check-input" type="checkbox" value="{{tarefa.id}}" id="flexCheckDefault" onclick="retomar_tarefa('{{tarefa.id}}')" checked/>
                                         {% else %}
-                                            <input class="form-check-input" type="checkbox" value="{{tarefa.id}}" id="flexCheckDefault"/>
+                                            <input class="form-check-input" type="checkbox" value="{{tarefa.id}}" id="flexCheckDefault" onclick="finalizar_tarefa('{{tarefa.id}}')"/>
                                         {% endif %}
                                     </td>
                                     <td>{{tarefa.titulo}}</td>
@@ -206,43 +206,52 @@
             document.getElementById('data_input').setAttribute('min', formattedDate);
        
 
-            window.onload = function () {
-                bootlint.showLintReportForCurrentDocument([], {
-                    hasProblems: false,
-                    problemFree: false
-                });
-            
-                $('[data-toggle="tooltip"]').tooltip();
-            
-                function formatDate(date) {
-                    return (
-                        date.getDate() +
-                        "/" +
-                        (date.getMonth() + 1) +
-                        "/" +
-                        date.getFullYear()
-                    );
-                }
-            
-                var currentDate = formatDate(new Date());
-            
-                $(".due-date-button").datepicker({
-                    format: "dd/mm/yyyy",
-                    autoclose: true,
-                    todayHighlight: true,
-                    startDate: currentDate,
-                    orientation: "bottom right"
-                });
-            
-                $(".due-date-button").on("click", function (event) {
-                    $(".due-date-button")
-                        .datepicker("show")
-                        .on("changeDate", function (dateChangeEvent) {
-                            $(".due-date-button").datepicker("hide");
-                            $(".due-date-label").text(formatDate(dateChangeEvent.date));
-                        });
-                });
-            };
+            function finalizar_tarefa(id){
+
+                var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/finalizar_tarefa/',
+                    data: {
+                        'id':id,
+                        // Add other data if needed
+                        'csrfmiddlewaretoken': csrf_token,
+                    },
+                    success: function(response){
+                        alert("Tarefa finalizada!")
+                        // Reload the page
+                        window.location.reload();
+                    },
+                    error:function(response){
+                        console.log(error)
+                        alert("Houve um error")
+                    }
+                })
+            }
+
+            function retomar_tarefa(id){
+
+                var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/retomar_tarefa/',
+                    data: {
+                        'id':id,
+                        // Add other data if needed
+                        'csrfmiddlewaretoken': csrf_token,
+                    },
+                    success: function(response){
+                        alert("Tarefa finalizada!")
+                        // Reload the page
+                        window.location.reload();
+                    },
+                    error:function(response){
+                        alert("Houve um error")
+                    }
+                })
+            }
             
         </script>
       </footer>
