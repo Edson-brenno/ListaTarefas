@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from index.models import TbTarefasFat
@@ -15,3 +15,25 @@ def index(request):
         TbTarefasFat.adicionar_tarefa(titulo_tarefa, dt_tarefa, request.user)
 
     return render(request, 'to_do/to_do.html', context={'usuario':request.user.username, 'tarefas':TbTarefasFat.obter_tarefas_ativas(request.user)})
+
+@login_required(login_url='/login/')
+def finalizar_tarefa(request):
+
+    if request.method == 'POST':
+
+        id = request.POST.get('id',)
+
+        TbTarefasFat.finalizar_tarefa(id)
+
+        return redirect('/index/')
+    
+@login_required(login_url='/login/')
+def retomar_tarefa(request):
+
+    if request.method == 'POST':
+
+        id = request.POST.get('id',)
+
+        TbTarefasFat.finalizar_tarefa(id)
+
+        return redirect('/index/')

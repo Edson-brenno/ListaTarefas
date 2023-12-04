@@ -26,6 +26,20 @@ class TbTarefasFat(models.Model):
         print("eadassda")
         return cls.objects.filter(usuario=usuario, foi_finalizada=False).values('id','titulo','data_atividade','data_criacao',
                                                                                 'foi_finalizada')
+    
+    # Finaliza uma tarefa
+    @classmethod
+    def finalizar_tarefa(cls,id):
+        tarefa = cls.objects.get(id=id)
+        tarefa.foi_finalizada = True
+        tarefa.save()
+
+    # Retoma uma tarefa
+    @classmethod
+    def retomar_tarefa(cls,id):
+        tarefa = cls.objects.get(id=id)
+        tarefa.foi_finalizada = False
+        tarefa.save()
     class Meta:
         
         ordering = ['id']
