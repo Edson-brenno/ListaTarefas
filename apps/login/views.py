@@ -21,7 +21,6 @@ def login(request):
 
             return redirect('/index/')
 
-        print(usuario_form)
         if usuario is None:
 
             mensagem = ("usuario ou senha inválidos")
