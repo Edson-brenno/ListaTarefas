@@ -23,8 +23,15 @@ class TbTarefasFat(models.Model):
     # Obter atividades ativas
     @classmethod
     def obter_tarefas_ativas(cls,usuario):
-        print("eadassda")
+
         return cls.objects.filter(usuario=usuario, foi_finalizada=False).values('id','titulo','data_atividade','data_criacao',
+                                                                                'foi_finalizada')
+
+    # Obter atividades Finalizadas
+    @classmethod
+    def obter_tarefas_finalizadas(cls,usuario):
+        
+        return cls.objects.filter(usuario=usuario, foi_finalizada=True).values('id','titulo','data_atividade','data_criacao',
                                                                                 'foi_finalizada')
     
     # Finaliza uma tarefa
