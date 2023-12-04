@@ -140,40 +140,122 @@
                 </form>
                 
             </div>
-            <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+            
             <!-- Todo list section -->
             <div class="row mx-1 px-5 pb-3 w-80">
-                <div class="col mx-auto mt-1">
-                    <table id="lista_de_tarefas" class="table table-striped" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Status</th>
-                                <th>Atividade</th>
-                                <th>Data criação</th>
-                                <th>Data atividade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            {%for tarefa in tarefas %}
-                                <tr>
-                                    <td>
-                                        {% if tarefa.foi_finalizada == True %}
-                                            <input class="form-check-input" type="checkbox" value="{{tarefa.id}}" id="flexCheckDefault" onclick="retomar_tarefa('{{tarefa.id}}')" checked/>
-                                        {% else %}
-                                            <input class="form-check-input" type="checkbox" value="{{tarefa.id}}" id="flexCheckDefault" onclick="finalizar_tarefa('{{tarefa.id}}')"/>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{tarefa.titulo}}</td>
-                                    <td>{{tarefa.data_criacao}}</td>
-                                    <td>{{tarefa.data_atividade}}</td>
-                                </tr>
-                            {% endfor %}
+                <!-- Tabs navs -->
+                <ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+                    <li class="nav-item" role="presentation">
+                    <a
+                        data-mdb-tab-init
+                        class="nav-link active"
+                        id="ex2-tab-1"
+                        href="#ex2-tabs-1"
+                        role="tab"
+                        aria-controls="ex2-tabs-1"
+                        aria-selected="true"
+                        >A Fazer</a
+                    >
+                    </li>
+            
+                    <li class="nav-item" role="presentation">
+                    <a
+                        data-mdb-tab-init
+                        class="nav-link"
+                        id="ex2-tab-3"
+                        href="#ex2-tabs-3"
+                        role="tab"
+                        aria-controls="ex2-tabs-3"
+                        aria-selected="false"
+                        >Finalizados</a
+                    >
+                    </li>
+                </ul>
+                <!-- Tabs navs -->
+                <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+
+                <!-- Tabs content -->
+                <div class="tab-content" id="ex2-content">
+                    <div
+                    class="tab-pane fade show active"
+                    id="ex2-tabs-1"
+                    role="tabpanel"
+                    aria-labelledby="ex2-tab-1"
+                    >
+                        <div class="col mx-auto mt-1">
+                            <table id="lista_de_tarefas_ativas" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Atividade</th>
+                                        <th>Data criação</th>
+                                        <th>Data atividade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+        
+                                    {%for tarefa_ativa in tarefas_ativas %}
+                                        <tr>
+                                            <td>
+                                                {% if tarefa_ativa.foi_finalizada == True %}
+                                                    <input class="form-check-input" type="checkbox" value="{{tarefa_ativa.id}}" id="flexCheckDefault" onclick="retomar_tarefa('{{tarefa_ativa.id}}')" checked/>
+                                                {% else %}
+                                                    <input class="form-check-input" type="checkbox" value="{{tarefa_ativa.id}}" id="flexCheckDefault" onclick="finalizar_tarefa('{{tarefa_ativa.id}}')"/>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{tarefa_ativa.titulo}}</td>
+                                            <td>{{tarefa_ativa.data_criacao}}</td>
+                                            <td>{{tarefa_ativa.data_atividade}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    
+                                </tbody>
+                            </table>
                             
-                        </tbody>
-                    </table>
-                    
+                        </div>
+                    </div>
+                    <div
+                    class="tab-pane fade"
+                    id="ex2-tabs-3"
+                    role="tabpanel"
+                    aria-labelledby="ex2-tab-3"
+                    >
+                        <div class="col mx-auto mt-1">
+                            <table id="lista_de_tarefas_finalizadas" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Atividade</th>
+                                        <th>Data criação</th>
+                                        <th>Data atividade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+        
+                                    {%for tarefa_finalizada in tarefas_finalizadas %}
+                                        <tr>
+                                            <td>
+                                                {% if tarefa_finalizada.foi_finalizada == True %}
+                                                    <input class="form-check-input" type="checkbox" value="{{tarefa_finalizada.id}}" id="flexCheckDefault" onclick="retomar_tarefa('{{tarefa_finalizada.id}}')" checked/>
+                                                {% else %}
+                                                    <input class="form-check-input" type="checkbox" value="{{tarefa_finalizada.id}}" id="flexCheckDefault" onclick="finalizar_tarefa('{{tarefa_finalizada.id}}')"/>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{tarefa_finalizada.titulo}}</td>
+                                            <td>{{tarefa_finalizada.data_criacao}}</td>
+                                            <td>{{tarefa_finalizada.data_atividade}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
                 </div>
+                <!-- Tabs content -->
+               
             </div>
         </div>
       </section>
@@ -194,7 +276,9 @@
 
         <script>
 
-            new DataTable('#lista_de_tarefas');
+            new DataTable('#lista_de_tarefas_ativas');
+
+            new DataTable('#lista_de_tarefas_finalizadas');
 
             // Atributos para setar data minima no input
             var currentDate = new Date();
@@ -243,7 +327,7 @@
                         'csrfmiddlewaretoken': csrf_token,
                     },
                     success: function(response){
-                        alert("Tarefa finalizada!")
+                        alert("Tarefa Retomada!")
                         // Reload the page
                         window.location.reload();
                     },
